@@ -4,32 +4,31 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
 
 /**
  * Created by rajeevkumarsingh on 27/06/17.
  */
 @Entity
-@Table(name = "venta")
+@Table(name = "articulo")
 @EntityListeners(AuditingEntityListener.class)
 @JsonIgnoreProperties(value = {"createdAt", "updatedAt"},
         allowGetters = true)
-public class Venta {
+public class Articulo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Autowired
-    private String clavecliente;
+    private String descripcion;
 
     @Autowired
-    private String nombre;
+    private String modelo;
 
     @Autowired
-    private String total;
+    private String precio;
 
     @Autowired
-    private String fecha;
+    private String existencia;
 
     public Long getid() {
         return id;
@@ -39,36 +38,35 @@ public class Venta {
         this.id = id;
     }
 
-    public String getclavecliente() {
-        return clavecliente;
+    public String getdescripcion() {
+        return descripcion;
     }
 
-    public void setclavecliente(String clavecliente) {
-        this.clavecliente = clavecliente;
+    public void setnombre(String descripcion) {
+        this.descripcion = descripcion;
+    }
+    
+    public String getappaterno() {
+        return modelo;
+    }
+    
+    public void setmodelo(String modelo) {
+        this.modelo = modelo;
     }
 
-    public String getnombre() {
-        return nombre;
+    public String getprecio() {
+        return precio;
+    }
+    
+    public void setprecio(String precio) {
+        this.precio = precio;
     }
 
-    public void setnombre(String nombre) {
-        this.nombre = nombre;
+    public String getexistencia() {
+        return existencia;
     }
 
-    public String gettotal() {
-        return total;
+    public void setexistencia(String existencia) {
+        this.existencia = existencia;
     }
-
-    public void settotal(String total) {
-        this.total = total;
-    }
-
-    public String getfecha() {
-        return fecha;
-    }
-
-    public void setfecha(String fecha) {
-        this.fecha = fecha;
-    }
-
 }

@@ -18,10 +18,10 @@ CREATE TABLE cliente (
 );
 
 CREATE TABLE venta (
-  FolioVenta INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-  ClaveCliente INT,
-  Nombre VARCHAR(30),
-  Total INT,
-  Fecha DATE
+  id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  clavecliente VARCHAR(30),
+  nombre VARCHAR(30),
+  total VARCHAR(30),
+  fecha VARCHAR(30)
 );
 show tables;

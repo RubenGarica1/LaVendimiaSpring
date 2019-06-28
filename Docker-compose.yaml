@@ -2,7 +2,7 @@
    container_name: some-mysql
    image: mysql/mysql-server:5.7
    environment:
-    MYSQL_DATABASE: notes_app
+    MYSQL_DATABASE: vendimia
     MYSQL_ROOT_PASSWORD: root
     MYSQL_ROOT_HOST: '%'
    ports:

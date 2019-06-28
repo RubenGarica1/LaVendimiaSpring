@@ -4,32 +4,31 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
 
 /**
  * Created by rajeevkumarsingh on 27/06/17.
  */
 @Entity
-@Table(name = "venta")
+@Table(name = "cliente")
 @EntityListeners(AuditingEntityListener.class)
 @JsonIgnoreProperties(value = {"createdAt", "updatedAt"},
         allowGetters = true)
-public class Venta {
+public class Cliente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Autowired
-    private String clavecliente;
-
-    @Autowired
     private String nombre;
 
     @Autowired
-    private String total;
+    private String appaterno;
 
     @Autowired
-    private String fecha;
+    private String apmaterno;
+
+    @Autowired
+    private String rfc;
 
     public Long getid() {
         return id;
@@ -39,14 +38,6 @@ public class Venta {
         this.id = id;
     }
 
-    public String getclavecliente() {
-        return clavecliente;
-    }
-
-    public void setclavecliente(String clavecliente) {
-        this.clavecliente = clavecliente;
-    }
-
     public String getnombre() {
         return nombre;
     }
@@ -54,21 +45,28 @@ public class Venta {
     public void setnombre(String nombre) {
         this.nombre = nombre;
     }
-
-    public String gettotal() {
-        return total;
+    
+    public String getappaterno() {
+        return appaterno;
+    }
+    
+    public void setappaterno(String appaterno) {
+        this.appaterno = appaterno;
     }
 
-    public void settotal(String total) {
-        this.total = total;
+    public String getapmaterno() {
+        return apmaterno;
+    }
+    
+    public void setapmaterno(String apmaterno) {
+        this.apmaterno = apmaterno;
     }
 
-    public String getfecha() {
-        return fecha;
+    public String getrfc() {
+        return rfc;
     }
 
-    public void setfecha(String fecha) {
-        this.fecha = fecha;
+    public void setrfc(String rfc) {
+        this.rfc = rfc;
     }
-
 }
