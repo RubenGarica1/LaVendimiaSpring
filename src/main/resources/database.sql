@@ -15,23 +15,11 @@ CREATE TABLE cliente (
   rfc VARCHAR(30)
 )
 
-CREATE TABLE articulosvendidos (
-  idav INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-  cantidad INT(6),
-  precio INT(6),
-  ida INT(6),
-  FOREIGN KEY (ida) REFERENCES articulos(ida)
-);
-
 CREATE TABLE venta (
-  idv INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-  folio VARCHAR(50),
-  idc INT(50),
-  idav INT(6),
-  idav INT(6),
-  fecha VARCHAR(50),
-  cantidadID VARCHAR(50),
-  FOREIGN KEY (idc) REFERENCES cliente(idc)
-  FOREIGN KEY (idav) REFERENCES articulosvendidos(idav)
+  FolioVenta INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  ClaveCliente INT,
+  Nombre VARCHAR(30),
+  Total INT,
+  Fecha DATE
 );
 
