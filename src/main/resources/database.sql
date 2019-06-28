@@ -1,3 +1,5 @@
+create database vendimia;
+use vendimia ;
 
 CREATE TABLE articulos (
   ida INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
@@ -5,7 +7,7 @@ CREATE TABLE articulos (
   modelo VARCHAR(30),
   precio DECIMAL,
   existencia INT
-)
+);
 
 CREATE TABLE cliente (
   idc INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
@@ -13,7 +15,7 @@ CREATE TABLE cliente (
   appaterno VARCHAR(30),
   apmaterno VARCHAR(30),
   rfc VARCHAR(30)
-)
+);
 
 CREATE TABLE venta (
   FolioVenta INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
@@ -22,4 +24,4 @@ CREATE TABLE venta (
   Total INT,
   Fecha DATE
 );
-
+show tables;
