@@ -19,6 +19,9 @@ public class ClienteController {
     ClienteRepository VentaRepository;
 
     @GetMapping("/cliente")
+    @CrossOrigin
+    @PutMapping("/cors-enabled-endpoint")
+
     public List<Cliente> getAllNotes() {
         return VentaRepository.findAll();
     }
