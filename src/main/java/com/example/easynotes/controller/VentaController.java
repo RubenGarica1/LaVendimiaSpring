@@ -19,11 +19,15 @@ public class VentaController {
     VentaRepository VentaRepository;
 
     @GetMapping("/venta")
+    @CrossOrigin
+    @PutMapping("/cors-enabled-endpoint")
     public List<Venta> getAllNotes() {
         return VentaRepository.findAll();
     }
 
     @PostMapping("/venta")
+    @CrossOrigin
+    @PutMapping("/cors-enabled-endpoint")
     public Venta createVenta(@Valid @RequestBody Venta venta) {
         System.out.println(venta);
         return VentaRepository.save(venta);

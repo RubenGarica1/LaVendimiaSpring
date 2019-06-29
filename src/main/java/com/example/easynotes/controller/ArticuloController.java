@@ -1,4 +1,5 @@
 package com.example.easynotes.controller;
+import com.example.easynotes.exception.ResourceNotFoundException;
 
 import com.example.easynotes.model.Articulo;
 import com.example.easynotes.repository.ArticuloRepository;
@@ -16,16 +17,42 @@ import java.util.List;
 public class ArticuloController {
 
     @Autowired
-    ArticuloRepository VentaRepository;
+    ArticuloRepository ArticuloRepository;
 
     @GetMapping("/articulo")
+    @CrossOrigin
+    @PutMapping("/cors-enabled-endpoint")
     public List<Articulo> getAllNotes() {
-        return VentaRepository.findAll();
+        return ArticuloRepository.findAll();
     }
 
     @PostMapping("/articulo")
+    @CrossOrigin
+    @PutMapping("/cors-enabled-endpoint")
     public Articulo createVenta(@Valid @RequestBody Articulo venta) {
-        System.out.println(venta);
-        return VentaRepository.save(venta);
+        return ArticuloRepository.save(venta);
+    }
+
+    @GetMapping("/articulo/{id}")
+    @CrossOrigin
+    @PutMapping("/cors-enabled-endpoint")
+    public Articulo getNoteById(@PathVariable(value = "id") Long id) {
+        return ArticuloRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Note", "id", id));
+    }
+
+    @PutMapping("/articulo/{id}")
+    @CrossOrigin
+    public Articulo updateNote(@PathVariable(value = "id") Long noteId,
+                                           @Valid @RequestBody Articulo noteDetails) {
+
+        Articulo articulo = ArticuloRepository.findById(noteId)
+                .orElseThrow(() -> new ResourceNotFoundException("Note", "id", noteId));
+
+        articulo.setexistencia(noteDetails.getdescripcion());
+        articulo.setexistencia(noteDetails.getexistencia());
+
+        Articulo updatedNote = ArticuloRepository.save(articulo);
+        return updatedNote;
     }
 }

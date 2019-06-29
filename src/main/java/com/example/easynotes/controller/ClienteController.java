@@ -27,6 +27,8 @@ public class ClienteController {
     }
 
     @PostMapping("/cliente")
+    @CrossOrigin
+    @PutMapping("/cors-enabled-endpoint")
     public Cliente createVenta(@Valid @RequestBody Cliente venta) {
         System.out.println(venta);
         return VentaRepository.save(venta);
