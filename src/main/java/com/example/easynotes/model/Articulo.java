@@ -46,7 +46,7 @@ public class Articulo {
         this.descripcion = descripcion;
     }
     
-    public String getappaterno() {
+    public String getmodelo() {
         return modelo;
     }
     
