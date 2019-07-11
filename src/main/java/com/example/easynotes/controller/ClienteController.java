@@ -50,5 +50,21 @@ public class ClienteController {
     public long countClientes() {
         return VentaRepository.count();
     }
-    
+
+    @PutMapping("/cliente/{id}")
+    @CrossOrigin
+    public Cliente updateNote(@PathVariable(value = "id") Long clienteId,
+    @Valid @RequestBody Cliente ClienteDetails) {
+
+        Cliente cliente = VentaRepository.findById(clienteId)
+                .orElseThrow(() -> new ResourceNotFoundException("cliente", "id", clienteId));
+
+        cliente.setnombre(ClienteDetails.getnombre());
+        cliente.setappaterno(ClienteDetails.getappaterno());
+        cliente.setapmaterno(ClienteDetails.getapmaterno());
+        cliente.setrfc(ClienteDetails.getrfc());
+
+        Cliente updatedCliente = VentaRepository.save(cliente);
+        return updatedCliente;
+    }
 }
