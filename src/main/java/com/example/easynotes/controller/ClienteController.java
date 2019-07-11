@@ -4,6 +4,7 @@ import com.example.easynotes.model.Cliente;
 import com.example.easynotes.repository.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import com.example.easynotes.exception.ResourceNotFoundException;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -32,5 +33,13 @@ public class ClienteController {
     public Cliente createVenta(@Valid @RequestBody Cliente venta) {
         System.out.println(venta);
         return VentaRepository.save(venta);
+    }
+    
+    @GetMapping("/cliente/{id}")
+    @CrossOrigin
+    @PutMapping("/cors-enabled-endpoint")
+    public Cliente getNoteById(@PathVariable(value = "id") Long cliente) {
+        return VentaRepository.findById(cliente)
+                .orElseThrow(() -> new ResourceNotFoundException("cliente", "id", cliente));
     }
 }
