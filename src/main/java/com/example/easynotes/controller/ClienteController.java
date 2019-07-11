@@ -42,4 +42,13 @@ public class ClienteController {
         return VentaRepository.findById(cliente)
                 .orElseThrow(() -> new ResourceNotFoundException("cliente", "id", cliente));
     }
+
+    @GetMapping("/cliente/count")
+    @CrossOrigin
+    @PutMapping("/cors-enabled-endpoint")
+
+    public long countClientes() {
+        return VentaRepository.count();
+    }
+    
 }
