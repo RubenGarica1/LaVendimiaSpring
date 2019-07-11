@@ -55,4 +55,11 @@ public class ArticuloController {
         Articulo updatedNote = ArticuloRepository.save(articulo);
         return updatedNote;
     }
+    @GetMapping("/articulo/count")
+    @CrossOrigin
+    @PutMapping("/cors-enabled-endpoint")
+
+    public long countClientes() {
+        return ArticuloRepository.count();
+    }
 }
