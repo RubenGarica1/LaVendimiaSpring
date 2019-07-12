@@ -5,9 +5,13 @@ import com.example.easynotes.repository.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import com.example.easynotes.exception.ResourceNotFoundException;
+import com.example.easynotes.application.ClienteApplication;
+import com.example.easynotes.repository.ClienteRepository;
+
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Created by rajeevkumarsingh on 27/06/17.
@@ -15,56 +19,55 @@ import java.util.List;
 @RestController
 @RequestMapping("/app")
 public class ClienteController {
+    @Autowired
+    ClienteApplication ClienteApplication;
 
     @Autowired
-    ClienteRepository VentaRepository;
+    ClienteRepository ClienteRepository;
 
     @GetMapping("/cliente")
     @CrossOrigin
     @PutMapping("/cors-enabled-endpoint")
-
-    public List<Cliente> getAllNotes() {
-        return VentaRepository.findAll();
+    public List<Cliente> getAllClientes() throws Exception {
+        return ClienteApplication.getAllClientes();
     }
 
     @PostMapping("/cliente")
     @CrossOrigin
     @PutMapping("/cors-enabled-endpoint")
-    public Cliente createVenta(@Valid @RequestBody Cliente venta) {
-        System.out.println(venta);
-        return VentaRepository.save(venta);
+    public Cliente createVenta(@Valid @RequestBody Cliente venta) throws Exception {
+        return ClienteApplication.guardaElCliente(venta);
     }
-    
+
     @GetMapping("/cliente/{id}")
     @CrossOrigin
     @PutMapping("/cors-enabled-endpoint")
-    public Cliente getNoteById(@PathVariable(value = "id") Long cliente) {
-        return VentaRepository.findById(cliente)
-                .orElseThrow(() -> new ResourceNotFoundException("cliente", "id", cliente));
+    public Optional<Cliente> getNoteById(@PathVariable(value = "id") Long cliente) throws Exception {
+        return ClienteApplication.getIdClientes(cliente);
     }
 
     @GetMapping("/cliente/count")
     @CrossOrigin
     @PutMapping("/cors-enabled-endpoint")
 
-    public long countClientes() {
-        return VentaRepository.count();
+    public long countClientes() throws Exception {
+        return ClienteApplication.clienteCount();
     }
 
     @PutMapping("/cliente/{id}")
     @CrossOrigin
     public Cliente updateNote(@PathVariable(value = "id") Long clienteId,
-    @Valid @RequestBody Cliente ClienteDetails) {
+    @Valid @RequestBody Cliente ClienteDetails) throws Exception {
 
-        Cliente cliente = VentaRepository.findById(clienteId)
-                .orElseThrow(() -> new ResourceNotFoundException("cliente", "id", clienteId));
+        Cliente cliente = ClienteApplication.updateCliente(clienteId);
 
         cliente.setnombre(ClienteDetails.getnombre());
         cliente.setappaterno(ClienteDetails.getappaterno());
         cliente.setapmaterno(ClienteDetails.getapmaterno());
         cliente.setrfc(ClienteDetails.getrfc());
 
-        Cliente updatedCliente = VentaRepository.save(cliente);
+        Cliente updatedCliente = ClienteApplication.saveCliente(cliente);
         return updatedCliente;
     }
+
 }
