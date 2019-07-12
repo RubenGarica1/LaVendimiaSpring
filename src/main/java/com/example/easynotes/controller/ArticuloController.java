@@ -66,5 +66,17 @@ public class ArticuloController {
         Articulo updatedCliente = ArticuloApplication.saveCliente(articulo);
         return updatedCliente;
     }
+    @PutMapping("/articulo/existencia/{id}")
+    @CrossOrigin
+    public Articulo updateArticuloExistecia(@PathVariable(value = "id") Long clienteId,
+    @Valid @RequestBody Articulo ArticuloDetails) throws Exception {
+
+        Articulo articulo = ArticuloApplication.updateCliente(clienteId);
+
+        articulo.setexistencia(ArticuloDetails.getexistencia());
+
+        Articulo updatedCliente = ArticuloApplication.saveCliente(articulo);
+        return updatedCliente;
+    }
 
 }
