@@ -22,9 +22,6 @@ public class ClienteController {
     @Autowired
     ClienteApplication ClienteApplication;
 
-    @Autowired
-    ClienteRepository ClienteRepository;
-
     @GetMapping("/cliente")
     @CrossOrigin
     @PutMapping("/cors-enabled-endpoint")

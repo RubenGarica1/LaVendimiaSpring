@@ -4,6 +4,7 @@ import com.example.easynotes.model.Venta;
 import com.example.easynotes.repository.VentaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import com.example.easynotes.application.VentaApplication;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -16,20 +17,20 @@ import java.util.List;
 public class VentaController {
 
     @Autowired
-    VentaRepository VentaRepository;
+    VentaApplication VentaApplication;
 
     @GetMapping("/venta")
     @CrossOrigin
     @PutMapping("/cors-enabled-endpoint")
-    public List<Venta> getAllNotes() {
-        return VentaRepository.findAll();
+
+    public List<Venta> getAlVentas() {
+        return VentaApplication.getAllVenta();
     }
 
     @PostMapping("/venta")
     @CrossOrigin
     @PutMapping("/cors-enabled-endpoint")
-    public Venta createVenta(@Valid @RequestBody Venta venta) {
-        System.out.println(venta);
-        return VentaRepository.save(venta);
+    public Venta createVenta(@Valid @RequestBody Venta Venta) throws Exception {
+        return VentaApplication.guardarConfiguracion(Venta);
     }
 }

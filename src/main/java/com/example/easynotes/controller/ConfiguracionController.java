@@ -5,6 +5,7 @@ import com.example.easynotes.repository.ConfiguracionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import com.example.easynotes.exception.ResourceNotFoundException;
+import com.example.easynotes.application.ConfiguracionApplication;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -17,37 +18,36 @@ import java.util.List;
 public class ConfiguracionController {
 
     @Autowired
-    ConfiguracionRepository ConfiguracionRepository;
+    ConfiguracionApplication ConfiguracionApplication;
 
     @GetMapping("/configuracion")
     @CrossOrigin
     @PutMapping("/cors-enabled-endpoint")
 
     public List<Configuracion> getAllNotes() {
-        return ConfiguracionRepository.findAll();
+        return ConfiguracionApplication.getAllConfiguracion();
     }
 
     @PostMapping("/configuracion")
     @CrossOrigin
     @PutMapping("/cors-enabled-endpoint")
-    public Configuracion createVenta(@Valid @RequestBody Configuracion venta) {
-        System.out.println(venta);
-        return ConfiguracionRepository.save(venta);
+    public Configuracion createVenta(@Valid @RequestBody Configuracion Configuracion) throws Exception {
+        return ConfiguracionApplication.guardarConfiguracion(Configuracion);
     }
 
     @PutMapping("/configuracion/{id}")
     @CrossOrigin
-    public Configuracion updateNote(@PathVariable(value = "id") Long noteId,
-    @Valid @RequestBody Configuracion ConfiguracionDetails) {
+    public Configuracion updateNote(@PathVariable(value = "id") Long ConfiguracionId,
+    @Valid @RequestBody Configuracion ClienteDetails) throws Exception {
 
-        Configuracion configuracion = ConfiguracionRepository.findById(noteId)
-                .orElseThrow(() -> new ResourceNotFoundException("configuracion", "id", noteId));
+        Configuracion Configuracion = ConfiguracionApplication.updateConfiguracion(ConfiguracionId);
 
-        configuracion.setTazafin(ConfiguracionDetails.getTazafin());
-        configuracion.setEngache(ConfiguracionDetails.getEngache());
-        configuracion.setPlazoMaximo(ConfiguracionDetails.getPlazoMaximo());
+        Configuracion.setTazafin(ClienteDetails.getTazafin());
+        Configuracion.setEngache(ClienteDetails.getEngache());
+        Configuracion.setPlazoMaximo(ClienteDetails.getPlazoMaximo());
 
-        Configuracion updatedNote = ConfiguracionRepository.save(configuracion);
-        return updatedNote;
+        Configuracion updatedCliente = ConfiguracionApplication.saveConfiguracion(Configuracion);
+        return updatedCliente;
     }
+
 }
